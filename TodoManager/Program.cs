@@ -18,7 +18,7 @@ namespace TodoManager
             builder.Services.AddScoped<ITodoRepository, TodoRepository>();
             builder.Services.AddValidatorsFromAssemblyContaining<TodoValidator>();
             // below code allow any origin so we don't get cors error while testing with frontend
-            builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+           // builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
             builder.Services.AddEndpointsApiExplorer();  // Enables API endpoint discovery
             builder.Services.AddSwaggerGen();  // Enables Swagger generation
 
@@ -38,7 +38,7 @@ namespace TodoManager
                 seedData(db);
 
             }
-            app.UseCors("CorsPolicy");
+           // app.UseCors("CorsPolicy");
 
             app.MapGroup("/api").MapTodoEndpoints();
             
