@@ -19,6 +19,8 @@ namespace TodoManager
             builder.Services.AddValidatorsFromAssemblyContaining<TodoValidator>();
             // below code allow any origin so we don't get cors error while testing with frontend
             builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+            builder.Services.AddEndpointsApiExplorer();  // Enables API endpoint discovery
+            builder.Services.AddSwaggerGen();  // Enables Swagger generation
 
             var app = builder.Build();
             using (var scope = app.Services.CreateScope())
