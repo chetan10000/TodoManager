@@ -10,10 +10,10 @@ namespace TodoManager
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            
             builder.Services.AddDbContext<ApplicationDbContext>
             (
-                options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString"))
+                options => options.UseSqlite(builder.Configuration.GetConnectionString("ConnectionString"))
             );
             builder.Services.AddScoped<ITodoRepository, TodoRepository>();
             builder.Services.AddValidatorsFromAssemblyContaining<TodoValidator>();
@@ -36,7 +36,8 @@ namespace TodoManager
                 this command is not safe for production better 
                 in production we can use db.Database.Migrate();
                 */
-                db.Database.EnsureCreated();
+               db.Database.EnsureCreated();
+               //db.Database.Migrate();
                 seedData(db);
 
             }

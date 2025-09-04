@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  todo_manager:
+    build: .
+    environment:
+      - RUNNING_IN_DOCKER=true
+      - ConnectionStrings__DefaultConnection=Data Source=/app/data/tododb.sqlite  # SQLite connection string
+    volumes:
+      - todo_data:/app/data  # Map named volume 'todo_data' to /app/data in the container
+    networks:
+      - todo_network  # Connecting the container to the network
+    container_name: todo_manager_container
+    ports:
+      - "8090:80"  # Expose port 80 inside the container, map to 8090 on host
+
+networks:
+  todo_network:
+    driver: bridge  # Use bridge networking driver (default)
+
+volumes:
+  todo_data:  # Named volume to persist SQLite database
